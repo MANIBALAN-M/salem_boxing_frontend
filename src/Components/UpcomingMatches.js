@@ -31,9 +31,9 @@ const UpcomingMatches = () => {
   return (
     <section id="matches" className="section-padding matches-section">
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
           <span className="section-tag">
-            <Trophy size={16} /> Tournament & Championship Schedules
+            <Trophy size={14} /> Tournament & Championship Schedules
           </span>
           <h2 className="section-title">
             UPCOMING <span className="text-gradient">MATCHES & TOURNAMENTS</span>
@@ -42,7 +42,7 @@ const UpcomingMatches = () => {
             Official state boxing meets, district championship bouts, and tournament announcements. View official flyers and register online.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '20px', flexWrap: 'wrap' }}>
             {['All', 'Upcoming', 'Registrations Open', 'Completed'].map((status) => (
               <button
                 key={status}
@@ -56,11 +56,12 @@ const UpcomingMatches = () => {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
-            Loading tournaments...
+          <div style={{ textAlign: 'center', padding: '50px 20px', color: 'var(--text-secondary)' }}>
+            <div className="pulse-glow" style={{ fontSize: '1.5rem', marginBottom: '10px' }}>🥊</div>
+            Loading tournaments and fixtures...
           </div>
         ) : filteredMatches.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+          <div style={{ textAlign: 'center', padding: '50px 20px', color: 'var(--text-muted)' }}>
             No tournaments found under this filter. Check back soon for new schedules!
           </div>
         ) : (
@@ -69,7 +70,7 @@ const UpcomingMatches = () => {
               <div key={match.id} className="tournament-card">
                 <div>
                   {/* Top Status & Event Badge */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', gap: '8px' }}>
                     <span className="tournament-event-badge">
                       <Sparkles size={12} style={{ display: 'inline', marginRight: '4px' }} />
                       {match.event_name || 'Boxing Tournament'}
@@ -90,7 +91,7 @@ const UpcomingMatches = () => {
                   {/* Date, Time, Venue, Category Metadata */}
                   <div className="tournament-meta-box">
                     <div className="tournament-meta-row">
-                      <div className="tournament-meta-icon"><Calendar size={18} /></div>
+                      <div className="tournament-meta-icon"><Calendar size={16} /></div>
                       <div>
                         <div className="meta-label">Date & Day</div>
                         <div className="meta-value">{match.match_date}</div>
@@ -98,7 +99,7 @@ const UpcomingMatches = () => {
                     </div>
 
                     <div className="tournament-meta-row">
-                      <div className="tournament-meta-icon"><Clock size={18} /></div>
+                      <div className="tournament-meta-icon"><Clock size={16} /></div>
                       <div>
                         <div className="meta-label">Timing</div>
                         <div className="meta-value">{match.match_time}</div>
@@ -106,7 +107,7 @@ const UpcomingMatches = () => {
                     </div>
 
                     <div className="tournament-meta-row" style={{ gridColumn: 'span 2' }}>
-                      <div className="tournament-meta-icon"><MapPin size={18} /></div>
+                      <div className="tournament-meta-icon"><MapPin size={16} /></div>
                       <div>
                         <div className="meta-label">Venue Location</div>
                         <div className="meta-value">{match.venue}</div>
@@ -114,7 +115,7 @@ const UpcomingMatches = () => {
                     </div>
 
                     <div className="tournament-meta-row" style={{ gridColumn: 'span 2' }}>
-                      <div className="tournament-meta-icon"><Trophy size={18} /></div>
+                      <div className="tournament-meta-icon"><Trophy size={16} /></div>
                       <div>
                         <div className="meta-label">Weight Class & Divisions</div>
                         <div className="meta-value" style={{ color: 'var(--gold)' }}>
@@ -124,24 +125,24 @@ const UpcomingMatches = () => {
                     </div>
                   </div>
 
-                  {/* Description / Summary */}
+                  {/* Description */}
                   {match.description && (
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '22px' }}>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', lineHeight: '1.6', marginBottom: '20px' }}>
                       {match.description}
                     </p>
                   )}
                 </div>
 
-                {/* Bottom Action Buttons: View Brochure & Register */}
-                <div style={{ display: 'flex', gap: '12px', marginTop: 'auto', flexWrap: 'wrap' }}>
+                {/* Bottom Action Buttons */}
+                <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', flexWrap: 'wrap' }}>
                   {(match.brochure_url || match.image_url || match.event_image) && (
                     <button
                       type="button"
                       onClick={() => setSelectedBrochure({ title: match.title, url: match.brochure_url || match.image_url || match.event_image })}
                       className="btn-secondary"
-                      style={{ flex: 1, padding: '12px 14px', fontSize: '0.82rem', borderColor: 'rgba(255, 0, 60, 0.4)', color: '#FFFFFF' }}
+                      style={{ flex: 1, padding: '11px 12px', fontSize: '0.78rem', borderColor: 'rgba(255, 0, 60, 0.4)' }}
                     >
-                      <FileText size={16} color="var(--primary)" /> View Brochure
+                      <FileText size={14} color="var(--primary)" /> View Flyer
                     </button>
                   )}
 
@@ -150,9 +151,9 @@ const UpcomingMatches = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
-                    style={{ flex: 1, padding: '12px 14px', fontSize: '0.82rem' }}
+                    style={{ flex: 1, padding: '11px 12px', fontSize: '0.78rem' }}
                   >
-                    <Send size={15} /> Register / Inquire
+                    <Send size={13} /> Inquire Now
                   </a>
                 </div>
               </div>
@@ -163,43 +164,43 @@ const UpcomingMatches = () => {
         {/* Brochure Lightbox Modal */}
         {selectedBrochure && (
           <div className="lightbox-overlay" onClick={() => setSelectedBrochure(null)}>
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '800px' }}>
-              <button className="lightbox-close-btn" onClick={() => setSelectedBrochure(null)}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '750px' }}>
+              <button className="lightbox-close-btn" onClick={() => setSelectedBrochure(null)} aria-label="Close modal">
                 <X size={20} />
               </button>
 
               <div style={{ marginBottom: '14px', textAlign: 'center' }}>
-                <h3 style={{ color: '#FFFFFF', fontFamily: 'Orbitron', fontSize: '1.2rem', marginBottom: '4px' }}>
+                <h3 style={{ color: '#FFFFFF', fontFamily: 'Orbitron', fontSize: '1.15rem', marginBottom: '4px' }}>
                   Official Tournament Brochure
                 </h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{selectedBrochure.title}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem' }}>{selectedBrochure.title}</p>
               </div>
 
-              <div style={{ textAlign: 'center', background: '#090A0E', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <div style={{ textAlign: 'center', background: '#090A0E', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)' }}>
                 <img 
                   src={selectedBrochure.url} 
                   alt="Tournament Brochure" 
-                  style={{ maxWidth: '100%', maxHeight: '65vh', objectFit: 'contain', borderRadius: '8px' }} 
+                  style={{ maxWidth: '100%', maxHeight: '60vh', objectFit: 'contain', borderRadius: '6px', margin: '0 auto' }} 
                 />
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', marginTop: '18px' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '16px', flexWrap: 'wrap' }}>
                 <a 
                   href={selectedBrochure.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn-primary"
-                  style={{ fontSize: '0.82rem', padding: '10px 20px' }}
+                  style={{ fontSize: '0.8rem', padding: '10px 18px' }}
                 >
-                  <ExternalLink size={14} /> Open Full Size
+                  <ExternalLink size={13} /> Open Full Size
                 </a>
                 <a 
                   href={selectedBrochure.url} 
                   download="tournament_brochure.jpg"
                   className="btn-secondary"
-                  style={{ fontSize: '0.82rem', padding: '10px 20px' }}
+                  style={{ fontSize: '0.8rem', padding: '10px 18px' }}
                 >
-                  <Download size={14} /> Download Flyer
+                  <Download size={13} /> Download Flyer
                 </a>
               </div>
             </div>

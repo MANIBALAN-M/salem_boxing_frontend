@@ -57,9 +57,9 @@ const JoinUs = () => {
   return (
     <section id="join" className="join-section section-padding" style={{ background: '#090A0E' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
           <span className="section-tag">
-            <Flame size={16} /> Start Your Transformation
+            <Flame size={14} /> Start Your Transformation
           </span>
           <h2 className="section-title">
             CLAIM YOUR <span className="text-gradient">FREE TRIAL SESSION</span>
@@ -69,17 +69,17 @@ const JoinUs = () => {
           </p>
         </div>
 
-        <div className="contact-info" style={{ maxWidth: '680px', margin: '0 auto', background: 'rgba(18, 20, 27, 0.85)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '36px' }}>
+        <div className="contact-info" style={{ maxWidth: '680px', margin: '0 auto', background: 'rgba(18, 20, 27, 0.85)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '32px 24px' }}>
           {submitted ? (
-            <div style={{ textAlign: 'center', padding: '30px 10px' }}>
-              <div style={{ width: '70px', height: '70px', background: 'rgba(16, 185, 129, 0.2)', color: '#10B981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
-                <CheckCircle2 size={42} />
+            <div style={{ textAlign: 'center', padding: '24px 10px' }}>
+              <div style={{ width: '64px', height: '64px', background: 'rgba(16, 185, 129, 0.2)', color: '#10B981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto' }}>
+                <CheckCircle2 size={38} />
               </div>
-              <h3 style={{ fontSize: '1.6rem', color: '#FFFFFF', marginBottom: '10px' }}>
-                Query Received, Champion!
+              <h3 style={{ fontSize: '1.45rem', color: '#FFFFFF', marginBottom: '8px' }}>
+                Trial Request Received!
               </h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.6' }}>
-                Your trial request has been submitted to Salem Boxing Club. Our coaches will call or message you shortly with batch schedule details.
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '22px', lineHeight: '1.6', fontSize: '0.92rem' }}>
+                Your trial booking has been logged. Our coaches will contact you via WhatsApp or phone with batch timings and wrap guidelines.
               </p>
               
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -88,23 +88,24 @@ const JoinUs = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
-                  style={{ background: '#25D366', borderColor: '#25D366' }}
+                  style={{ background: '#25D366', borderColor: '#25D366', fontSize: '0.84rem' }}
                 >
-                  <MessageSquare size={16} /> Connect On WhatsApp Now
+                  <MessageSquare size={15} /> Chat On WhatsApp Now
                 </a>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
                   className="btn-secondary"
+                  style={{ fontSize: '0.84rem' }}
                 >
-                  Submit Another Query
+                  Submit Another
                 </button>
               </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="join-form">
               {errorMessage && (
-                <div style={{ background: 'rgba(255, 0, 60, 0.2)', border: '1px solid var(--primary)', padding: '12px', borderRadius: 'var(--radius-sm)', color: '#FFF', marginBottom: '20px', fontSize: '0.9rem' }}>
+                <div style={{ background: 'rgba(255, 0, 60, 0.2)', border: '1px solid var(--primary)', padding: '12px', borderRadius: 'var(--radius-sm)', color: '#FFF', marginBottom: '18px', fontSize: '0.88rem' }}>
                   {errorMessage}
                 </div>
               )}
@@ -122,7 +123,7 @@ const JoinUs = () => {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
                 <div className="form-group">
                   <label className="form-label">Phone / WhatsApp Number *</label>
                   <input 
@@ -148,7 +149,7 @@ const JoinUs = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
                 <div className="form-group">
                   <label className="form-label">Experience Level</label>
                   <select 
@@ -156,7 +157,6 @@ const JoinUs = () => {
                     value={formData.experience}
                     onChange={handleChange}
                     className="form-control"
-                    style={{ background: '#12141C' }}
                   >
                     <option value="Beginner">Beginner (No Prior Boxing)</option>
                     <option value="Intermediate">Intermediate (Some Martial Arts/Gym)</option>
@@ -171,7 +171,6 @@ const JoinUs = () => {
                     value={formData.interest_program}
                     onChange={handleChange}
                     className="form-control"
-                    style={{ background: '#12141C' }}
                   >
                     <option value="Pro Combat Boxing">Pro Combat Boxing</option>
                     <option value="MMA & Striking Conditioning">MMA & Conditioning</option>
@@ -199,13 +198,13 @@ const JoinUs = () => {
                 type="submit" 
                 className="btn-primary" 
                 disabled={submitting}
-                style={{ width: '100%', padding: '16px', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '15px', fontSize: '0.9rem' }}
               >
-                {submitting ? 'Submitting to Supabase...' : <><Send size={18} /> CONFIRM TRIAL APPLICATION</>}
+                {submitting ? 'Submitting Application...' : <><Send size={16} /> CONFIRM TRIAL APPLICATION</>}
               </button>
 
-              <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                🔒 Your details are stored securely in Supabase and only accessible by Salem Boxing Club coaches.
+              <div style={{ textAlign: 'center', marginTop: '14px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                🔒 Your details are stored securely in Supabase and only accessible by Salem Boxing Club staff.
               </div>
             </form>
           )}

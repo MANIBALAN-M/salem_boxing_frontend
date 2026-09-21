@@ -1,6 +1,6 @@
 import React from 'react';
 import heroImg from '../Images/hero.png';
-import { Flame, Trophy, ArrowRight } from 'lucide-react';
+import { Flame, Trophy, ArrowRight, MessageSquare } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="container">
         <div className="hero-content">
           <div className="hero-tagline">
-            <Flame size={18} /> Premier Combat Sports & Boxing Academy
+            <Flame size={16} /> Premier Combat Sports & Boxing Academy
           </div>
 
           <h1>
@@ -22,16 +22,16 @@ const Hero = () => {
           </h1>
 
           <p>
-            Salem's top-ranked boxing and martial arts training center at Nirmal Skywin Mall. 
+            Salem's top-ranked boxing and combat sports academy at Nirmal Skywin Mall. 
             Master the sweet science of boxing, build explosive athleticism, and achieve peak physical conditioning.
           </p>
 
           <div className="hero-cta-group">
             <a href="#join" className="btn-primary">
-              Book Free Trial <ArrowRight size={18} />
+              Book Free Trial <ArrowRight size={16} />
             </a>
             <a href="#matches" className="btn-secondary">
-              <Trophy size={18} /> Upcoming Matches
+              <Trophy size={16} /> Upcoming Matches
             </a>
             <a 
               href="https://wa.me/919500273164?text=Hi%20Salem%20Boxing%20Club,%20I%20want%20to%20know%20about%20admissions" 
@@ -40,7 +40,7 @@ const Hero = () => {
               className="btn-secondary"
               style={{ borderColor: 'rgba(37, 211, 102, 0.4)', color: '#25D366' }}
             >
-              WhatsApp Us
+              <MessageSquare size={16} /> WhatsApp Us
             </a>
           </div>
 

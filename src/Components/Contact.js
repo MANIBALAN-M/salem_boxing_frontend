@@ -5,9 +5,9 @@ const Contact = () => {
   return (
     <section id="contact" className="section-padding contact-section" style={{ background: '#07080B' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
           <span className="section-tag">
-            <MapPin size={16} /> Location & Hours
+            <MapPin size={14} /> Location & Hours
           </span>
           <h2 className="section-title">
             VISIT OUR <span className="text-gradient">TRAINING ARENA</span>
@@ -19,47 +19,49 @@ const Contact = () => {
         
         <div className="contact-grid">
           <div className="contact-info">
-            <div className="info-item">
-              <div className="info-icon"><MapPin size={28} /></div>
-              <div className="info-text">
-                <h4>Club Address</h4>
-                <p>3rd Floor, Nirmal Skywin Mall, 9, Rajaji Rd, Peramanur, Salem, Tamil Nadu 636007, India</p>
+            <div>
+              <div className="info-item">
+                <div className="info-icon"><MapPin size={26} /></div>
+                <div className="info-text">
+                  <h4>Club Address</h4>
+                  <p>3rd Floor, Nirmal Skywin Mall, 9, Rajaji Rd, Peramanur, Salem, Tamil Nadu 636007, India</p>
+                </div>
               </div>
-            </div>
-            
-            <div className="info-item">
-              <div className="info-icon"><Clock size={28} /></div>
-              <div className="info-text">
-                <h4>Training Hours</h4>
-                <p><strong>Monday - Saturday:</strong> 05:30 AM – 10:00 AM & 04:30 PM – 09:30 PM</p>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Sunday: Special Championship Sparring / Pre-booked slots</p>
+              
+              <div className="info-item">
+                <div className="info-icon"><Clock size={26} /></div>
+                <div className="info-text">
+                  <h4>Training Hours</h4>
+                  <p><strong>Monday - Saturday:</strong> 05:30 AM – 10:00 AM & 04:30 PM – 09:30 PM</p>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px' }}>Sunday: Special Championship Sparring / Pre-booked slots</p>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <div className="info-icon"><Phone size={26} /></div>
+                <div className="info-text">
+                  <h4>Coach Direct Hotline</h4>
+                  <p><a href="tel:+919500273164" style={{ color: '#FFFFFF', textDecoration: 'none', fontWeight: '700' }}>+91 95002-73164</a></p>
+                </div>
               </div>
             </div>
 
-            <div className="info-item">
-              <div className="info-icon"><Phone size={28} /></div>
-              <div className="info-text">
-                <h4>Coach Direct Hotline</h4>
-                <p><a href="tel:+919500273164" style={{ color: '#FFFFFF', textDecoration: 'none', fontWeight: '700' }}>+91 95002-73164</a></p>
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', gap: '12px', marginTop: '30px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
               <a 
                 href="https://wa.me/919500273164?text=Hi%20Salem%20Boxing%20Club,%20I%20would%20like%20to%20visit%20the%20gym" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn-primary"
-                style={{ background: '#25D366', borderColor: '#25D366', fontSize: '0.85rem' }}
+                style={{ background: '#25D366', borderColor: '#25D366', fontSize: '0.82rem', flex: 1 }}
               >
-                <MessageSquare size={16} /> WhatsApp Inquiry
+                <MessageSquare size={15} /> WhatsApp
               </a>
               <a 
                 href="tel:+919500273164" 
                 className="btn-secondary"
-                style={{ fontSize: '0.85rem' }}
+                style={{ fontSize: '0.82rem', flex: 1 }}
               >
-                <Phone size={16} /> Direct Call
+                <Phone size={15} /> Direct Call
               </a>
             </div>
           </div>
@@ -72,14 +74,14 @@ const Contact = () => {
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade">
             </iframe>
-            <div style={{ padding: '16px', background: 'rgba(18, 20, 27, 0.95)', textAlign: 'center', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Nirmal Skywin Mall, Salem</span>
+            <div style={{ padding: '14px 18px', background: 'rgba(18, 20, 27, 0.98)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Nirmal Skywin Mall, Salem</span>
               <a 
                 href="https://maps.app.goo.gl/5YJMqCcMfg2bkpTu8" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn-outline-danger"
-                style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                style={{ fontSize: '0.74rem', padding: '6px 14px' }}
               >
                 Open Google Maps <ExternalLink size={12} />
               </a>

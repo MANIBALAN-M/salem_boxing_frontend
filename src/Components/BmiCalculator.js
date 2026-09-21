@@ -41,7 +41,7 @@ const BmiCalculator = () => {
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <span className="section-tag">
-            <Activity size={16} /> Boxing Fitness Tool
+            <Activity size={14} /> Boxing Fitness Tool
           </span>
           <h2 className="section-title">
             CALCULATE YOUR <span className="text-gradient">BOXING WEIGHT CLASS</span>
@@ -55,18 +55,18 @@ const BmiCalculator = () => {
           <div className="bmi-grid">
             {/* Input Form */}
             <div>
-              <h3 style={{ fontSize: '1.3rem', color: '#FFFFFF', marginBottom: '24px' }}>
+              <h3 style={{ fontSize: '1.25rem', color: '#FFFFFF', marginBottom: '20px' }}>
                 Enter Your Stats
               </h3>
 
-              <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '18px' }}>
                 {['Male', 'Female'].map((g) => (
                   <button
                     key={g}
                     type="button"
                     onClick={() => setGender(g)}
-                    className={`btn-secondary ${gender === g ? 'btn-primary' : ''}`}
-                    style={{ flex: 1, padding: '10px' }}
+                    className={gender === g ? 'btn-primary' : 'btn-secondary'}
+                    style={{ flex: 1, padding: '10px', fontSize: '0.82rem' }}
                   >
                     {g}
                   </button>
@@ -74,42 +74,46 @@ const BmiCalculator = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Height (in Centimeters): {height} cm</label>
+                <label className="form-label">Height: <strong>{height} cm</strong></label>
                 <input
                   type="range"
                   min="120"
                   max="220"
                   value={height}
                   onChange={(e) => setHeight(e.target.value)}
-                  style={{ width: '100%', accentColor: 'var(--primary)' }}
+                  style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer' }}
                 />
                 <input
                   type="number"
                   className="form-control"
-                  style={{ marginTop: '10px' }}
+                  style={{ marginTop: '8px' }}
                   value={height}
                   onChange={(e) => setHeight(e.target.value)}
                   placeholder="Height in cm"
+                  min="50"
+                  max="250"
                 />
               </div>
 
               <div className="form-group">
-                <label className="form-label">Weight (in Kilograms): {weight} kg</label>
+                <label className="form-label">Weight: <strong>{weight} kg</strong></label>
                 <input
                   type="range"
                   min="30"
                   max="150"
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  style={{ width: '100%', accentColor: 'var(--primary)' }}
+                  style={{ width: '100%', accentColor: 'var(--primary)', cursor: 'pointer' }}
                 />
                 <input
                   type="number"
                   className="form-control"
-                  style={{ marginTop: '10px' }}
+                  style={{ marginTop: '8px' }}
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   placeholder="Weight in kg"
+                  min="20"
+                  max="250"
                 />
               </div>
             </div>
@@ -119,33 +123,33 @@ const BmiCalculator = () => {
               <span className="boxing-category-tag">
                 🎯 {category}
               </span>
-              <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Your Body Mass Index (BMI)</div>
+              <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)' }}>Your Body Mass Index (BMI)</div>
               <div className="bmi-value">{bmi}</div>
 
               <div 
                 style={{ 
                   background: 'rgba(255, 0, 60, 0.12)', 
                   border: '1px solid rgba(255, 0, 60, 0.3)',
-                  padding: '16px',
+                  padding: '14px',
                   borderRadius: 'var(--radius-sm)',
-                  marginBottom: '20px'
+                  marginBottom: '18px'
                 }}
               >
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Combat Boxing Division
                 </div>
-                <div style={{ fontSize: '1.25rem', fontFamily: 'Orbitron', fontWeight: '800', color: '#FFFFFF', marginTop: '4px' }}>
+                <div style={{ fontSize: '1.15rem', fontFamily: 'Orbitron', fontWeight: '800', color: '#FFFFFF', marginTop: '4px' }}>
                   {weightClass}
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--gold)', fontWeight: '700', marginBottom: '24px' }}>
-                <Flame size={20} />
-                <span>Burns ~{caloriesBurn} kcal / boxing session</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--gold)', fontWeight: '700', marginBottom: '20px', fontSize: '0.9rem' }}>
+                <Flame size={18} />
+                <span>Burns ~{caloriesBurn} kcal / session</span>
               </div>
 
               <a href="#join" className="btn-primary" style={{ width: '100%' }}>
-                Start Training In Your Class <ArrowRight size={16} />
+                Start Training In Your Class <ArrowRight size={15} />
               </a>
             </div>
           </div>
