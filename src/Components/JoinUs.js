@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import DataService from '../services/dataService';
+import { Send, CheckCircle2, Flame, MessageSquare } from 'lucide-react';
 
 const JoinUs = () => {
   const [formData, setFormData] = useState({
@@ -6,15 +8,46 @@ const JoinUs = () => {
     phone: '',
     email: '',
     experience: 'Beginner',
+    interest_program: 'Pro Combat Boxing',
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for your interest! Our team will contact you shortly.');
-    console.log('Form Submitted:', formData);
-    // Reset form
-    setFormData({ name: '', phone: '', email: '', experience: 'Beginner', message: '' });
+    setSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      await DataService.create('queries', {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        experience: formData.experience,
+        interest_program: formData.interest_program,
+        message: formData.message,
+        status: 'New',
+        notes: ''
+      });
+
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        experience: 'Beginner',
+        interest_program: 'Pro Combat Boxing',
+        message: ''
+      });
+    } catch (err) {
+      console.error('Error submitting query:', err);
+      setErrorMessage('Could not save your query online, but our team is ready on WhatsApp!');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -22,85 +55,160 @@ const JoinUs = () => {
   };
 
   return (
-    <section id="join" className="join-section section-padding" style={{ minHeight: '80vh' }}>
+    <section id="join" className="join-section section-padding" style={{ background: '#090A0E' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <span className="section-tag">Join the Elite</span>
-          <h2 className="section-title">SEND YOUR QUERY</h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-            Ready to start your journey? Fill out the form below and we'll get back to you with membership details and training schedules.
+          <span className="section-tag">
+            <Flame size={16} /> Start Your Transformation
+          </span>
+          <h2 className="section-title">
+            CLAIM YOUR <span className="text-gradient">FREE TRIAL SESSION</span>
+          </h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            Ready to lace up the gloves? Fill out the inquiry below and Coach Samidurai's team will contact you with batch slots and membership passes.
           </p>
         </div>
 
-        <div className="contact-info" style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <form onSubmit={handleSubmit} className="join-form">
-            <div className="form-group" style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--primary)', fontWeight: '700' }}>Full Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                required 
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter your name" 
-                style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '4px' }}
-              />
+        <div className="contact-info" style={{ maxWidth: '680px', margin: '0 auto', background: 'rgba(18, 20, 27, 0.85)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', padding: '36px' }}>
+          {submitted ? (
+            <div style={{ textAlign: 'center', padding: '30px 10px' }}>
+              <div style={{ width: '70px', height: '70px', background: 'rgba(16, 185, 129, 0.2)', color: '#10B981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
+                <CheckCircle2 size={42} />
+              </div>
+              <h3 style={{ fontSize: '1.6rem', color: '#FFFFFF', marginBottom: '10px' }}>
+                Query Received, Champion!
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: '1.6' }}>
+                Your trial request has been submitted to Salem Boxing Club. Our coaches will call or message you shortly with batch schedule details.
+              </p>
+              
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <a
+                  href="https://wa.me/919500273164?text=Hi%20Salem%20Boxing%20Club,%20I%20just%20submitted%20my%20trial%20query%20online!"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                  style={{ background: '#25D366', borderColor: '#25D366' }}
+                >
+                  <MessageSquare size={16} /> Connect On WhatsApp Now
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="btn-secondary"
+                >
+                  Submit Another Query
+                </button>
+              </div>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="join-form">
+              {errorMessage && (
+                <div style={{ background: 'rgba(255, 0, 60, 0.2)', border: '1px solid var(--primary)', padding: '12px', borderRadius: 'var(--radius-sm)', color: '#FFF', marginBottom: '20px', fontSize: '0.9rem' }}>
+                  {errorMessage}
+                </div>
+              )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
               <div className="form-group">
-                <label style={{ display: 'block', marginBottom: '8px', color: 'var(--primary)', fontWeight: '700' }}>Phone Number</label>
+                <label className="form-label">Full Name *</label>
                 <input 
-                  type="tel" 
-                  name="phone" 
+                  type="text" 
+                  name="name" 
                   required 
-                  value={formData.phone}
+                  value={formData.name}
                   onChange={handleChange}
-                  placeholder="+91" 
-                  style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '4px' }}
+                  placeholder="Enter your full name" 
+                  className="form-control"
                 />
               </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div className="form-group">
+                  <label className="form-label">Phone / WhatsApp Number *</label>
+                  <input 
+                    type="tel" 
+                    name="phone" 
+                    required 
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="+91 95002-XXXXX" 
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Email Address (Optional)</label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="yourname@domain.com" 
+                    className="form-control"
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div className="form-group">
+                  <label className="form-label">Experience Level</label>
+                  <select 
+                    name="experience" 
+                    value={formData.experience}
+                    onChange={handleChange}
+                    className="form-control"
+                    style={{ background: '#12141C' }}
+                  >
+                    <option value="Beginner">Beginner (No Prior Boxing)</option>
+                    <option value="Intermediate">Intermediate (Some Martial Arts/Gym)</option>
+                    <option value="Advanced">Advanced (Tournament Fighter)</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Program of Interest</label>
+                  <select 
+                    name="interest_program" 
+                    value={formData.interest_program}
+                    onChange={handleChange}
+                    className="form-control"
+                    style={{ background: '#12141C' }}
+                  >
+                    <option value="Pro Combat Boxing">Pro Combat Boxing</option>
+                    <option value="MMA & Striking Conditioning">MMA & Conditioning</option>
+                    <option value="Kids & Youth Boxing">Kids & Youth Boxing</option>
+                    <option value="Women Self Defense & Kick-Fit">Women Self Defense & Kick-Fit</option>
+                    <option value="1-on-1 Personal Training">1-on-1 Personal Training</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="form-group">
-                <label style={{ display: 'block', marginBottom: '8px', color: 'var(--primary)', fontWeight: '700' }}>Email Id</label>
-                <input 
-                  type="email" 
-                  name="email" 
-                  value={formData.email}
+                <label className="form-label">Your Fitness Goal / Message</label>
+                <textarea 
+                  name="message" 
+                  rows="3" 
+                  value={formData.message}
                   onChange={handleChange}
-                  placeholder="yourname@gmail.com" 
-                  style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '4px' }}
-                />
+                  placeholder="e.g. Weight loss, learning sparring technique, evening batch timing preference..." 
+                  className="form-control"
+                  style={{ resize: 'none' }}
+                ></textarea>
               </div>
-            </div>
 
-            <div className="form-group" style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--primary)', fontWeight: '700' }}>Experience Level</label>
-              <select 
-                name="experience" 
-                value={formData.experience}
-                onChange={handleChange}
-                style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '4px' }}
+              <button 
+                type="submit" 
+                className="btn-primary" 
+                disabled={submitting}
+                style={{ width: '100%', padding: '16px', fontSize: '0.95rem' }}
               >
-                <option value="Beginner" style={{ background: '#0A0A0A' }}>Beginner / No Experience</option>
-                <option value="Intermediate" style={{ background: '#0A0A0A' }}>Intermediate (Some Boxing/MMA)</option>
-                <option value="Advanced" style={{ background: '#0A0A0A' }}>Advanced / Professional</option>
-              </select>
-            </div>
+                {submitting ? 'Submitting to Supabase...' : <><Send size={18} /> CONFIRM TRIAL APPLICATION</>}
+              </button>
 
-            <div className="form-group" style={{ marginBottom: '30px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--primary)', fontWeight: '700' }}>Your Message / Goal</label>
-              <textarea 
-                name="message" 
-                rows="4" 
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="What are your fitness goals?" 
-                style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '4px', resize: 'none' }}
-              ></textarea>
-            </div>
-
-            <button type="submit" className="btn-primary" style={{ width: '100%', padding: '15px' }}>SUBMIT QUERY</button>
-          </form>
+              <div style={{ textAlign: 'center', marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                🔒 Your details are stored securely in Supabase and only accessible by Salem Boxing Club coaches.
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>
