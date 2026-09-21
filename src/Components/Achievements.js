@@ -6,6 +6,7 @@ import defaultBoxerImg from '../Images/training.png';
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedMedal, setSelectedMedal] = useState('All');
   const [previewPhoto, setPreviewPhoto] = useState(null);
 
   useEffect(() => {
@@ -54,12 +55,16 @@ const Achievements = () => {
     }
   };
 
+  const filteredAchievements = selectedMedal === 'All'
+    ? achievements
+    : achievements.filter(a => a.medal_type === selectedMedal);
+
   return (
     <section id="achievements" className="section-padding achievements-section">
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '36px' }}>
           <span className="section-tag">
-            <Award size={16} /> Champions Hall of Fame
+            <Award size={14} /> Champions Hall of Fame
           </span>
           <h2 className="section-title">
             PROVEN <span className="text-gold-gradient">LEGACY & VICTORIES</span>
@@ -67,6 +72,18 @@ const Achievements = () => {
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
             Meet our champion athletes and medal winners who have brought glory to Salem Boxing Club in state and national competitions.
           </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '20px', flexWrap: 'wrap' }}>
+            {['All', 'Gold', 'Silver', 'Bronze', 'Trophy'].map((medal) => (
+              <button
+                key={medal}
+                className={`filter-btn ${selectedMedal === medal ? 'active' : ''}`}
+                onClick={() => setSelectedMedal(medal)}
+              >
+                {medal === 'All' ? 'All Accolades' : `${medal} Medals`}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Highlight Banner */}
@@ -75,44 +92,45 @@ const Achievements = () => {
             background: 'linear-gradient(135deg, rgba(255, 184, 0, 0.12), rgba(255, 0, 60, 0.12))',
             border: '1px solid rgba(255, 184, 0, 0.3)',
             borderRadius: 'var(--radius-md)',
-            padding: '24px 32px',
+            padding: '20px 24px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '20px',
-            marginBottom: '40px'
+            gap: '16px',
+            marginBottom: '36px'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ background: 'var(--gold)', color: '#000', padding: '12px', borderRadius: '12px' }}>
-              <Flame size={28} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{ background: 'var(--gold)', color: '#000', padding: '10px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Flame size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.2rem', color: '#FFFFFF', marginBottom: '4px' }}>
+              <h3 style={{ fontSize: '1.1rem', color: '#FFFFFF', marginBottom: '2px' }}>
                 Salem's Most Decorated Boxing Academy
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem' }}>
                 Over 24+ medals secured across State, University & National Boxing Tournaments.
               </p>
             </div>
           </div>
-          <a href="#join" className="btn-secondary" style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}>
-            <Star size={16} /> Train Under Champions
+          <a href="#join" className="btn-secondary" style={{ borderColor: 'var(--gold)', color: 'var(--gold)', fontSize: '0.8rem', padding: '10px 18px' }}>
+            <Star size={14} /> Train Under Champions
           </a>
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
-            Loading hall of fame...
+          <div style={{ textAlign: 'center', padding: '50px 20px', color: 'var(--text-secondary)' }}>
+            <div className="pulse-glow" style={{ fontSize: '1.5rem', marginBottom: '10px' }}>🏆</div>
+            Loading Hall of Fame champions...
           </div>
-        ) : achievements.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
-            No achievements records found.
+        ) : filteredAchievements.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '50px 20px', color: 'var(--text-muted)' }}>
+            No achievements found for this category.
           </div>
         ) : (
           <div className="achievements-grid">
-            {achievements.map((item) => {
+            {filteredAchievements.map((item) => {
               const photo = item.athlete_photo || item.image_url || defaultBoxerImg;
               return (
                 <div key={item.id} className="boxer-achievement-card">
@@ -124,7 +142,7 @@ const Achievements = () => {
                   >
                     <img src={photo} alt={item.athlete_name} className="boxer-photo-img" />
                     <div className="boxer-photo-overlay">
-                      <span><Eye size={14} style={{ display: 'inline', marginRight: '4px' }} /> View Boxer</span>
+                      <span><Eye size={13} style={{ display: 'inline', marginRight: '4px' }} /> View Boxer</span>
                     </div>
                     <span className="boxer-year-badge">{item.year}</span>
                   </div>
@@ -161,18 +179,18 @@ const Achievements = () => {
         {/* Boxer Photo Preview Modal */}
         {previewPhoto && (
           <div className="lightbox-overlay" onClick={() => setPreviewPhoto(null)}>
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', textAlign: 'center' }}>
-              <button className="lightbox-close-btn" onClick={() => setPreviewPhoto(null)}>
+            <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '540px', textAlign: 'center' }}>
+              <button className="lightbox-close-btn" onClick={() => setPreviewPhoto(null)} aria-label="Close photo preview">
                 <X size={20} />
               </button>
               <img 
                 src={previewPhoto.photo} 
                 alt={previewPhoto.name} 
-                style={{ maxWidth: '100%', maxHeight: '70vh', borderRadius: '12px', border: '2px solid var(--border-light)' }} 
+                style={{ maxWidth: '100%', maxHeight: '65vh', objectFit: 'contain', borderRadius: '10px', border: '1px solid var(--border-light)', margin: '0 auto' }} 
               />
-              <div style={{ marginTop: '16px' }}>
-                <h3 style={{ color: '#FFF', fontFamily: 'Orbitron', fontSize: '1.25rem' }}>{previewPhoto.name}</h3>
-                <p style={{ color: 'var(--gold)', fontSize: '0.9rem', marginTop: '4px' }}>{previewPhoto.title}</p>
+              <div style={{ marginTop: '14px' }}>
+                <h3 style={{ color: '#FFF', fontFamily: 'Orbitron', fontSize: '1.2rem' }}>{previewPhoto.name}</h3>
+                <p style={{ color: 'var(--gold)', fontSize: '0.88rem', marginTop: '4px' }}>{previewPhoto.title}</p>
               </div>
             </div>
           </div>
